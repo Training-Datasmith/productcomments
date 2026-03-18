@@ -1,4 +1,6 @@
 <?php
+
+declare(strict_types=1);
 /**
  * Copyright since 2007 PrestaShop SA and Contributors
  * PrestaShop is an International Registered Trademark & Property of PrestaShop SA
@@ -25,7 +27,7 @@
  */
 class ProductCommentCriterion extends ObjectModel
 {
-    const NAME_MAX_LENGTH = 64;
+    public const NAME_MAX_LENGTH = 64;
 
     public $id;
     public $id_product_comment_criterion_type;

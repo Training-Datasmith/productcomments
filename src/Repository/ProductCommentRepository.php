@@ -1,4 +1,6 @@
 <?php
+
+declare(strict_types=1);
 /**
  * Copyright since 2007 PrestaShop SA and Contributors
  * PrestaShop is an International Registered Trademark & Property of PrestaShop SA
@@ -63,7 +65,7 @@ class ProductCommentRepository extends ServiceEntityRepository
      */
     private $commentsMinimalTime;
 
-    const DEFAULT_COMMENTS_PER_PAGE = 5;
+    public const DEFAULT_COMMENTS_PER_PAGE = 5;
 
     /**
      * @param ManagerRegistry $registry
@@ -260,7 +262,9 @@ class ProductCommentRepository extends ServiceEntityRepository
         }
 
         return $this->connection->executeQuery(
-            $qb->getSQL(), $qb->getParameters(), $qb->getParameterTypes()
+            $qb->getSQL(),
+            $qb->getParameters(),
+            $qb->getParameterTypes()
         )->fetchAll();
     }
 
@@ -287,7 +291,9 @@ class ProductCommentRepository extends ServiceEntityRepository
         }
 
         return (int) $this->connection->executeQuery(
-            $qb->getSQL(), $qb->getParameters(), $qb->getParameterTypes()
+            $qb->getSQL(),
+            $qb->getParameters(),
+            $qb->getParameterTypes()
         )->fetch(\PDO::FETCH_COLUMN);
     }
 

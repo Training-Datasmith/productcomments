@@ -1,4 +1,6 @@
 <?php
+
+declare(strict_types=1);
 /**
  * Copyright since 2007 PrestaShop SA and Contributors
  * PrestaShop is an International Registered Trademark & Property of PrestaShop SA
@@ -34,8 +36,8 @@ use Doctrine\ORM\Mapping as ORM;
  */
 class ProductComment
 {
-    const TITLE_MAX_LENGTH = 64;
-    const CUSTOMER_NAME_MAX_LENGTH = 64;
+    public const TITLE_MAX_LENGTH = 64;
+    public const CUSTOMER_NAME_MAX_LENGTH = 64;
 
     /**
      * @var int

@@ -1,4 +1,6 @@
 <?php
+
+declare(strict_types=1);
 /**
  * Copyright since 2007 PrestaShop SA and Contributors
  * PrestaShop is an International Registered Trademark & Property of PrestaShop SA
@@ -132,7 +134,8 @@ class ProductComment extends ObjectModel
     {
         $cache_id = 'ProductComment::getByCustomer_' . (int) $id_product . '-' . (int) $id_customer . '-' . (bool) $get_last . '-' . (int) $id_guest;
         if (!Cache::isStored($cache_id)) {
-            $results = Db::getInstance()->executeS('
+            $results = Db::getInstance()->executeS(
+                '
 				SELECT *
 				FROM `' . _DB_PREFIX_ . 'product_comment` pc
 				WHERE pc.`id_product` = ' . (int) $id_product . '

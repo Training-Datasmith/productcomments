@@ -1,4 +1,6 @@
 <?php
+
+declare(strict_types=1);
 /**
  * Copyright since 2007 PrestaShop SA and Contributors
  * PrestaShop is an International Registered Trademark & Property of PrestaShop SA
@@ -36,10 +38,10 @@ use Validate;
  */
 class ProductCommentCriterion
 {
-    const NAME_MAX_LENGTH = 64;
-    const ENTIRE_CATALOG_TYPE = 1;
-    const CATEGORIES_TYPE = 2;
-    const PRODUCTS_TYPE = 3;
+    public const NAME_MAX_LENGTH = 64;
+    public const ENTIRE_CATALOG_TYPE = 1;
+    public const CATEGORIES_TYPE = 2;
+    public const PRODUCTS_TYPE = 3;
 
     /**
      * @var int
