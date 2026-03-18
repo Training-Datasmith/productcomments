@@ -37,10 +37,6 @@ class ProductCommentCriterionFormDataProvider implements FormDataProviderInterfa
      */
     private $langRepository;
 
-    /**
-     * @param ProductCommentCriterionRepository $pccriterionRepository
-     * @param LangRepository $langRepository
-     */
     public function __construct(
         ProductCommentCriterionRepository $pccriterionRepository,
         LangRepository $langRepository
@@ -52,7 +48,7 @@ class ProductCommentCriterionFormDataProvider implements FormDataProviderInterfa
     /**
      * {@inheritdoc}
      */
-    public function getData($criterionId)
+    public function getData($criterionId): array
     {
         $criterion = $this->pccriterionRepository->find($criterionId);
 
@@ -70,7 +66,7 @@ class ProductCommentCriterionFormDataProvider implements FormDataProviderInterfa
     /**
      * {@inheritdoc}
      */
-    public function getDefaultData()
+    public function getDefaultData(): array
     {
         $default_name = [];
 

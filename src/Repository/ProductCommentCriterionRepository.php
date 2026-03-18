@@ -44,11 +44,6 @@ use PrestaShop\PrestaShop\Adapter\SymfonyContainer;
 class ProductCommentCriterionRepository extends ServiceEntityRepository
 {
     /**
-     * @var ManagerRegistry the Doctrine Registry
-     */
-    private $registry;
-
-    /**
      * @var Connection the Database connection
      */
     private $connection;
@@ -88,21 +83,21 @@ class ProductCommentCriterionRepository extends ServiceEntityRepository
         }
     }
 
-    private function deleteCategories($criterion): int
+    private function deleteCategories(\PrestaShop\Module\ProductComment\Entity\ProductCommentCriterion $criterion): int
     {
         return $this->connection->executeUpdate('
             DELETE FROM `' . _DB_PREFIX_ . 'product_comment_criterion_category`
             WHERE `id_product_comment_criterion` = ' . $criterion->getId());
     }
 
-    private function deleteProducts($criterion): int
+    private function deleteProducts(\PrestaShop\Module\ProductComment\Entity\ProductCommentCriterion $criterion): int
     {
         return $this->connection->executeUpdate('
             DELETE FROM `' . _DB_PREFIX_ . 'product_comment_criterion_product`
             WHERE `id_product_comment_criterion` = ' . $criterion->getId());
     }
 
-    private function deleteGrades($criterion): int
+    private function deleteGrades(\PrestaShop\Module\ProductComment\Entity\ProductCommentCriterion $criterion): int
     {
         return $this->connection->executeUpdate('
             DELETE FROM `' . _DB_PREFIX_ . 'product_comment_grade`
@@ -156,7 +151,7 @@ class ProductCommentCriterionRepository extends ServiceEntityRepository
         return $res;
     }
 
-    private function updateCategories($criterion): int
+    private function updateCategories(\PrestaShop\Module\ProductComment\Entity\ProductCommentCriterion $criterion): int
     {
         $res = 0;
         $criterionId = $criterion->getId();
@@ -171,7 +166,7 @@ class ProductCommentCriterionRepository extends ServiceEntityRepository
         return $res;
     }
 
-    private function updateProducts($criterion): int
+    private function updateProducts(\PrestaShop\Module\ProductComment\Entity\ProductCommentCriterion $criterion): int
     {
         $res = 0;
         $criterionId = $criterion->getId();

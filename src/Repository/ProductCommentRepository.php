@@ -44,11 +44,6 @@ use PrestaShop\Module\ProductComment\Entity\ProductComment;
 class ProductCommentRepository extends ServiceEntityRepository
 {
     /**
-     * @var ManagerRegistry the Doctrine Registry
-     */
-    private $registry;
-
-    /**
      * @var Connection the Database connection
      */
     private $connection;
@@ -297,9 +292,7 @@ class ProductCommentRepository extends ServiceEntityRepository
     }
 
     /**
-     * @param array $productIds
      * @param bool $validatedOnly
-     *
      * @return array
      */
     public function getAverageGrades(array $productIds, $validatedOnly)
@@ -362,9 +355,7 @@ class ProductCommentRepository extends ServiceEntityRepository
     }
 
     /**
-     * @param array $productIds
      * @param bool $validatedOnly
-     *
      * @return array
      */
     public function getCommentsNumberForProducts(array $productIds, $validatedOnly)
@@ -447,7 +438,7 @@ class ProductCommentRepository extends ServiceEntityRepository
     /**
      * @param int $customerId
      */
-    public function cleanCustomerData($customerId)
+    public function cleanCustomerData($customerId): void
     {
         //We anonymize the customer comment by unlinking them (the name won't be visible any more but the grade and comment are still visible)
         $qb = $this->connection->createQueryBuilder();
@@ -505,8 +496,6 @@ class ProductCommentRepository extends ServiceEntityRepository
     }
 
     /**
-     * @param array $criteria
-     *
      * @return array
      */
     private function getLastComment(array $criteria)

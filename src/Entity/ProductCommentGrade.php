@@ -56,8 +56,6 @@ class ProductCommentGrade
     private $grade;
 
     /**
-     * @param ProductComment $comment
-     * @param ProductCommentCriterion $criterion
      * @param int $grade
      */
     public function __construct(

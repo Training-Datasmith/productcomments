@@ -134,10 +134,8 @@ class ProductComment
 
     /**
      * @param int $productId
-     *
-     * @return ProductComment
      */
-    public function setProductId($productId)
+    public function setProductId($productId): self
     {
         $this->productId = $productId;
 
@@ -154,10 +152,8 @@ class ProductComment
 
     /**
      * @param int $customerId
-     *
-     * @return ProductComment
      */
-    public function setCustomerId($customerId)
+    public function setCustomerId($customerId): self
     {
         $this->customerId = $customerId;
 
@@ -174,10 +170,8 @@ class ProductComment
 
     /**
      * @param int $guestId
-     *
-     * @return ProductComment
      */
-    public function setGuestId($guestId)
+    public function setGuestId($guestId): self
     {
         $this->guestId = $guestId;
 
@@ -194,10 +188,8 @@ class ProductComment
 
     /**
      * @param string $customerName
-     *
-     * @return ProductComment
      */
-    public function setCustomerName($customerName)
+    public function setCustomerName($customerName): self
     {
         $this->customerName = $customerName;
 
@@ -214,10 +206,8 @@ class ProductComment
 
     /**
      * @param string $title
-     *
-     * @return ProductComment
      */
-    public function setTitle($title)
+    public function setTitle($title): self
     {
         $this->title = $title;
 
@@ -234,10 +224,8 @@ class ProductComment
 
     /**
      * @param string $content
-     *
-     * @return ProductComment
      */
-    public function setContent($content)
+    public function setContent($content): self
     {
         $this->content = $content;
 
@@ -254,10 +242,8 @@ class ProductComment
 
     /**
      * @param int $grade
-     *
-     * @return ProductComment
      */
-    public function setGrade($grade)
+    public function setGrade($grade): self
     {
         $this->grade = $grade;
 
@@ -274,10 +260,8 @@ class ProductComment
 
     /**
      * @param bool $validate
-     *
-     * @return ProductComment
      */
-    public function setValidate($validate)
+    public function setValidate($validate): self
     {
         $this->validate = $validate;
 
@@ -294,10 +278,8 @@ class ProductComment
 
     /**
      * @param bool $deleted
-     *
-     * @return ProductComment
      */
-    public function setDeleted($deleted)
+    public function setDeleted($deleted): self
     {
         $this->deleted = $deleted;
 
@@ -316,20 +298,15 @@ class ProductComment
      * Date is stored in UTC timezone
      *
      * @param \DateTime $dateAdd
-     *
-     * @return ProductComment
      */
-    public function setDateAdd($dateAdd)
+    public function setDateAdd($dateAdd): self
     {
         $this->dateAdd = $dateAdd;
 
         return $this;
     }
 
-    /**
-     * @return array
-     */
-    public function toArray()
+    public function toArray(): array
     {
         return [
             'id_product' => $this->getProductId(),

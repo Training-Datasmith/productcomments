@@ -57,7 +57,6 @@ class ProductCommentUsefulness
     private $usefulness;
 
     /**
-     * @param ProductComment $comment
      * @param int $customerId
      * @param bool $usefulness
      */
@@ -97,10 +96,8 @@ class ProductCommentUsefulness
 
     /**
      * @param bool $usefulness
-     *
-     * @return ProductCommentUsefulness
      */
-    public function setUsefulness($usefulness)
+    public function setUsefulness($usefulness): self
     {
         $this->usefulness = $usefulness;
 

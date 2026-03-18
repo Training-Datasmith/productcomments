@@ -31,11 +31,6 @@ use PrestaShopBundle\Entity\Repository\LangRepository;
 class ProductCommentCriterionFormDataHandler implements FormDataHandlerInterface
 {
     /**
-     * @var ProductCommentCriterionRepository
-     */
-    private $pccriterionRepository;
-
-    /**
      * @var LangRepository
      */
     private $langRepository;
@@ -45,17 +40,11 @@ class ProductCommentCriterionFormDataHandler implements FormDataHandlerInterface
      */
     private $entityManager;
 
-    /**
-     * @param ProductCommentCriterionRepository $pccriterionRepository
-     * @param LangRepository $langRepository
-     * @param EntityManagerInterface $entityManager
-     */
     public function __construct(
         ProductCommentCriterionRepository $pccriterionRepository,
         LangRepository $langRepository,
         EntityManagerInterface $entityManager
     ) {
-        $this->pccriterionRepository = $pccriterionRepository;
         $this->langRepository = $langRepository;
         $this->entityManager = $entityManager;
     }

@@ -52,7 +52,6 @@ class ProductCommentReport
     private $customerId;
 
     /**
-     * @param ProductComment $comment
      * @param int $customerId
      */
     public function __construct(

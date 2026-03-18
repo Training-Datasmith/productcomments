@@ -73,9 +73,6 @@ class ProductCommentCriterionLang
         return $this->lang;
     }
 
-    /**
-     * @param Lang $lang
-     */
     public function setLang(Lang $lang): self
     {
         $this->lang = $lang;
