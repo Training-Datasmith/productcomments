@@ -301,7 +301,7 @@ class ProductComments extends Module implements WidgetInterface
         $this->_baseUrl = 'index.php?';
         foreach ($_GET as $k => $value) {
             if (!in_array($k, ['deleteCriterion', 'editCriterion'])) {
-                $this->_baseUrl .= $k . '=' . $value . '&';
+                $this->_baseUrl .= urlencode($k) . '=' . urlencode($value) . '&';
             }
         }
         $this->_baseUrl = rtrim($this->_baseUrl, '&');

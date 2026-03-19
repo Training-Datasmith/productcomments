@@ -138,12 +138,21 @@ class ProductCommentsPostCommentModuleFrontController extends ModuleFrontControl
      */
     private function addCommentGrades(ProductComment $productComment, array $criterions)
     {
+        if (empty($criterions)) {
+            return;
+        }
+
         /** @var EntityManagerInterface $entityManager */
         $entityManager = $this->container->get('doctrine.orm.entity_manager');
         $criterionRepository = $entityManager->getRepository(ProductCommentCriterion::class);
         $averageGrade = 0;
 
         foreach ($criterions as $criterionId => $grade) {
+            $grade = (int) $grade;
+            if ($grade < 1 || $grade > 5) {
+                $grade = max(1, min(5, $grade));
+            }
+
             $criterion = $criterionRepository->findOneBy(['id' => $criterionId]);
             $criterionGrade = new ProductCommentGrade(
                 $productComment,
@@ -207,6 +216,10 @@ class ProductCommentsPostCommentModuleFrontController extends ModuleFrontControl
             $criterion = $criterionRepository->findOneBy(['id' => $criterionId]);
             if (empty($criterion)) {
                 $errors[] = $this->trans('Criterions not available', [], 'Modules.Productcomments.Shop');
+            }
+
+            if (!is_numeric($grade) || (int) $grade < 1 || (int) $grade > 5) {
+                $errors[] = $this->trans('Grade must be between 1 and 5', [], 'Modules.Productcomments.Shop');
             }
         }
 
