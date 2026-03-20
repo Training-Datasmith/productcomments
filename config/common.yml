@@ -3,14 +3,14 @@ services:
     public: true
 
   product_comment_criterion_repository:
-    class: PrestaShop\Module\ProductComment\Repository\ProductCommentCriterionRepository
+    class: Presta_Shop\Module\Product_Comment\Repository\Product_Comment_Criterion_Repository
     arguments:
       - '@doctrine'
       - '@doctrine.dbal.default_connection'
       - '%database_prefix%'
 
   product_comment_repository:
-    class: PrestaShop\Module\ProductComment\Repository\ProductCommentRepository
+    class: Presta_Shop\Module\Product_Comment\Repository\Product_Comment_Repository
     arguments:
       - '@doctrine'
       - '@doctrine.dbal.default_connection'
