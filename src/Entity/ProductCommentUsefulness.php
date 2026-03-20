@@ -1,6 +1,6 @@
 <?php
 
-declare(strict_types=1);
+declare (strict_types=1);
 /**
  * Copyright since 2007 PrestaShop SA and Contributors
  * PrestaShop is an International Registered Trademark & Property of PrestaShop SA
@@ -25,16 +25,14 @@ declare(strict_types=1);
  * @copyright Since 2007 PrestaShop SA and Contributors
  * @license   https://opensource.org/licenses/AFL-3.0 Academic Free License 3.0 (AFL-3.0)
  */
-
-namespace PrestaShop\Module\ProductComment\Entity;
+namespace Presta_Shop\Module\Product_Comment\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
-
 /**
  * @ORM\Table()
  * @ORM\Entity()
  */
-class ProductCommentUsefulness
+class Product_Comment_Usefulness
 {
     /**
      * @ORM\Id
@@ -42,67 +40,56 @@ class ProductCommentUsefulness
      * @ORM\JoinColumn(name="id_product_comment", referencedColumnName="id_product_comment")
      */
     private $comment;
-
     /**
      * @var int
      *
      * @ORM\Id
      * @ORM\Column(name="id_customer", type="integer")
      */
-    private $customerId;
-
+    private $customer_id;
     /**
      * @var bool
      *
      * @ORM\Column(name="usefulness", type="boolean")
      */
     private $usefulness;
-
     /**
      * @param int $customerId
      * @param bool $usefulness
      */
-    public function __construct(
-        ProductComment $comment,
-        $customerId,
-        $usefulness
-    ) {
+    public function __construct(Product_Comment $comment, $customer_id, $usefulness)
+    {
         $this->comment = $comment;
-        $this->customerId = $customerId;
+        $this->customer_id = $customer_id;
         $this->usefulness = $usefulness;
     }
-
     /**
      * @return mixed
      */
-    public function getComment()
+    public function get_comment()
     {
         return $this->comment;
     }
-
     /**
      * @return int
      */
-    public function getCustomerId()
+    public function get_customer_id()
     {
-        return $this->customerId;
+        return $this->customer_id;
     }
-
     /**
      * @return bool
      */
-    public function isUsefulness()
+    public function is_usefulness()
     {
         return $this->usefulness;
     }
-
     /**
      * @param bool $usefulness
      */
-    public function setUsefulness($usefulness): self
+    public function set_usefulness($usefulness): self
     {
         $this->usefulness = $usefulness;
-
         return $this;
     }
 }

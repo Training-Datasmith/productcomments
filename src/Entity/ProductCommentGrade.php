@@ -1,6 +1,6 @@
 <?php
 
-declare(strict_types=1);
+declare (strict_types=1);
 /**
  * Copyright since 2007 PrestaShop SA and Contributors
  * PrestaShop is an International Registered Trademark & Property of PrestaShop SA
@@ -25,16 +25,14 @@ declare(strict_types=1);
  * @copyright Since 2007 PrestaShop SA and Contributors
  * @license   https://opensource.org/licenses/AFL-3.0 Academic Free License 3.0 (AFL-3.0)
  */
-
-namespace PrestaShop\Module\ProductComment\Entity;
+namespace Presta_Shop\Module\Product_Comment\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
-
 /**
  * @ORM\Table()
  * @ORM\Entity()
  */
-class ProductCommentGrade
+class Product_Comment_Grade
 {
     /**
      * @ORM\Id
@@ -42,46 +40,38 @@ class ProductCommentGrade
      * @ORM\JoinColumn(name="id_product_comment", referencedColumnName="id_product_comment")
      */
     private $comment;
-
     /**
      * @ORM\Id
      * @ORM\ManyToOne(targetEntity="ProductCommentCriterion")
      * @ORM\JoinColumn(name="id_product_comment_criterion", referencedColumnName="id_product_comment_criterion")
      */
     private $criterion;
-
     /**
      * @var int
      *
      * @ORM\Column(name="grade", type="integer")
      */
     private $grade;
-
     /**
      * @param int $grade
      */
-    public function __construct(
-        ProductComment $comment,
-        ProductCommentCriterion $criterion,
-        $grade
-    ) {
+    public function __construct(Product_Comment $comment, Product_Comment_Criterion $criterion, $grade)
+    {
         $this->comment = $comment;
         $this->criterion = $criterion;
         $this->grade = $grade;
     }
-
     /**
      * @return mixed
      */
-    public function getComment()
+    public function get_comment()
     {
         return $this->comment;
     }
-
     /**
      * @return mixed
      */
-    public function getCriterion()
+    public function get_criterion()
     {
         return $this->criterion;
     }

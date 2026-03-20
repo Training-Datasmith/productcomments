@@ -1,6 +1,6 @@
 <?php
 
-declare(strict_types=1);
+declare (strict_types=1);
 /**
  * Copyright since 2007 PrestaShop SA and Contributors
  * PrestaShop is an International Registered Trademark & Property of PrestaShop SA
@@ -25,20 +25,17 @@ declare(strict_types=1);
  * @copyright Since 2007 PrestaShop SA and Contributors
  * @license   https://opensource.org/licenses/AFL-3.0 Academic Free License 3.0 (AFL-3.0)
  */
-
-namespace PrestaShop\Module\ProductComment\Entity;
+namespace Presta_Shop\Module\Product_Comment\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
-
 /**
  * @ORM\Table()
  * @ORM\Entity()
  */
-class ProductComment
+class Product_Comment
 {
     public const TITLE_MAX_LENGTH = 64;
     public const CUSTOMER_NAME_MAX_LENGTH = 64;
-
     /**
      * @var int
      *
@@ -47,279 +44,227 @@ class ProductComment
      * @ORM\GeneratedValue(strategy="AUTO")
      */
     private $id;
-
     /**
      * @var int
      *
      * @ORM\Column(name="id_product", type="integer")
      */
-    private $productId;
-
+    private $product_id;
     /**
      * @var int
      *
      * @ORM\Column(name="id_customer", type="integer")
      */
-    private $customerId;
-
+    private $customer_id;
     /**
      * @var int
      *
      * @ORM\Column(name="id_guest", type="integer")
      */
-    private $guestId;
-
+    private $guest_id;
     /**
      * @var string
      *
      * @ORM\Column(name="customer_name", type="string", length=64)
      */
-    private $customerName;
-
+    private $customer_name;
     /**
      * @var string
      *
      * @ORM\Column(name="title", type="string", length=64)
      */
     private $title;
-
     /**
      * @var string
      *
      * @ORM\Column(name="content", type="text")
      */
     private $content;
-
     /**
      * @var int
      *
      * @ORM\Column(name="grade", type="integer")
      */
     private $grade;
-
     /**
      * @var bool
      *
      * @ORM\Column(name="validate", type="boolean")
      */
     private $validate = false;
-
     /**
      * @var bool
      *
      * @ORM\Column(name="deleted", type="boolean")
      */
     private $deleted = false;
-
     /**
      * @var \DateTime
      *
      * @ORM\Column(name="date_add", type="datetime")
      */
-    private $dateAdd;
-
+    private $date_add;
     /**
      * @return int
      */
-    public function getId()
+    public function get_id()
     {
         return $this->id;
     }
-
     /**
      * @return int
      */
-    public function getProductId()
+    public function get_product_id()
     {
-        return $this->productId;
+        return $this->product_id;
     }
-
     /**
      * @param int $productId
      */
-    public function setProductId($productId): self
+    public function set_product_id($product_id): self
     {
-        $this->productId = $productId;
-
+        $this->product_id = $product_id;
         return $this;
     }
-
     /**
      * @return int
      */
-    public function getCustomerId()
+    public function get_customer_id()
     {
-        return $this->customerId;
+        return $this->customer_id;
     }
-
     /**
      * @param int $customerId
      */
-    public function setCustomerId($customerId): self
+    public function set_customer_id($customer_id): self
     {
-        $this->customerId = $customerId;
-
+        $this->customer_id = $customer_id;
         return $this;
     }
-
     /**
      * @return int
      */
-    public function getGuestId()
+    public function get_guest_id()
     {
-        return $this->guestId;
+        return $this->guest_id;
     }
-
     /**
      * @param int $guestId
      */
-    public function setGuestId($guestId): self
+    public function set_guest_id($guest_id): self
     {
-        $this->guestId = $guestId;
-
+        $this->guest_id = $guest_id;
         return $this;
     }
-
     /**
      * @return string
      */
-    public function getCustomerName()
+    public function get_customer_name()
     {
-        return $this->customerName;
+        return $this->customer_name;
     }
-
     /**
      * @param string $customerName
      */
-    public function setCustomerName($customerName): self
+    public function set_customer_name($customer_name): self
     {
-        $this->customerName = $customerName;
-
+        $this->customer_name = $customer_name;
         return $this;
     }
-
     /**
      * @return string
      */
-    public function getTitle()
+    public function get_title()
     {
         return $this->title;
     }
-
     /**
      * @param string $title
      */
-    public function setTitle($title): self
+    public function set_title($title): self
     {
         $this->title = $title;
-
         return $this;
     }
-
     /**
      * @return string
      */
-    public function getContent()
+    public function get_content()
     {
         return $this->content;
     }
-
     /**
      * @param string $content
      */
-    public function setContent($content): self
+    public function set_content($content): self
     {
         $this->content = $content;
-
         return $this;
     }
-
     /**
      * @return int
      */
-    public function getGrade()
+    public function get_grade()
     {
         return $this->grade;
     }
-
     /**
      * @param int $grade
      */
-    public function setGrade($grade): self
+    public function set_grade($grade): self
     {
         $this->grade = $grade;
-
         return $this;
     }
-
     /**
      * @return bool
      */
-    public function isValidate()
+    public function is_validate()
     {
         return $this->validate;
     }
-
     /**
      * @param bool $validate
      */
-    public function setValidate($validate): self
+    public function set_validate($validate): self
     {
         $this->validate = $validate;
-
         return $this;
     }
-
     /**
      * @return bool
      */
-    public function isDeleted()
+    public function is_deleted()
     {
         return $this->deleted;
     }
-
     /**
      * @param bool $deleted
      */
-    public function setDeleted($deleted): self
+    public function set_deleted($deleted): self
     {
         $this->deleted = $deleted;
-
         return $this;
     }
-
     /**
      * @return \DateTime
      */
-    public function getDateAdd()
+    public function get_date_add()
     {
-        return $this->dateAdd;
+        return $this->date_add;
     }
-
     /**
      * Date is stored in UTC timezone
      *
      * @param \DateTime $dateAdd
      */
-    public function setDateAdd($dateAdd): self
+    public function set_date_add($date_add): self
     {
-        $this->dateAdd = $dateAdd;
-
+        $this->date_add = $date_add;
         return $this;
     }
-
-    public function toArray(): array
+    public function to_array(): array
     {
-        return [
-            'id_product' => $this->getProductId(),
-            'id_product_comment' => $this->getId(),
-            'title' => $this->getTitle(),
-            'content' => $this->getContent(),
-            'customer_name' => $this->getCustomerName(),
-            'date_add' => $this->dateAdd->format(\DateTime::ATOM),
-            'grade' => $this->grade,
-            'usefulness' => 3,
-            'total_usefulness' => 5,
-        ];
+        return ['id_product' => $this->get_product_id(), 'id_product_comment' => $this->get_id(), 'title' => $this->get_title(), 'content' => $this->get_content(), 'customer_name' => $this->get_customer_name(), 'date_add' => $this->date_add->format(\DateTime::ATOM), 'grade' => $this->grade, 'usefulness' => 3, 'total_usefulness' => 5];
     }
 }

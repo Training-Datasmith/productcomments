@@ -18,68 +18,49 @@
  * @copyright Since 2007 PrestaShop SA and Contributors
  * @license   https://opensource.org/licenses/AFL-3.0 Academic Free License version 3.0
  */
-declare(strict_types=1);
+declare (strict_types=1);
+namespace Presta_Shop\Module\Product_Comment\Form;
 
-namespace PrestaShop\Module\ProductComment\Form;
-
-use PrestaShop\Module\ProductComment\Repository\ProductCommentCriterionRepository;
-use PrestaShop\PrestaShop\Core\Form\IdentifiableObject\DataProvider\FormDataProviderInterface;
-use PrestaShopBundle\Entity\Repository\LangRepository;
-
-class ProductCommentCriterionFormDataProvider implements FormDataProviderInterface
+use Presta_Shop\Module\Product_Comment\Repository\Product_Comment_Criterion_Repository;
+use Presta_Shop\Presta_Shop\Core\Form\Identifiable_Object\Data_Provider\Form_Data_Provider_Interface;
+use Presta_Shop_Bundle\Entity\Repository\Lang_Repository;
+class Product_Comment_Criterion_Form_Data_Provider implements Form_Data_Provider_Interface
 {
     /**
      * @var ProductCommentCriterionRepository
      */
-    private $pccriterionRepository;
-
+    private $pccriterion_repository;
     /**
      * @var LangRepository
      */
-    private $langRepository;
-
-    public function __construct(
-        ProductCommentCriterionRepository $pccriterionRepository,
-        LangRepository $langRepository
-    ) {
-        $this->pccriterionRepository = $pccriterionRepository;
-        $this->langRepository = $langRepository;
-    }
-
-    /**
-     * {@inheritdoc}
-     */
-    public function getData($criterionId): array
+    private $lang_repository;
+    public function __construct(Product_Comment_Criterion_Repository $pccriterion_repository, Lang_Repository $lang_repository)
     {
-        $criterion = $this->pccriterionRepository->find($criterionId);
-
-        $criterionData = [
-            'type' => $criterion->getType(),
-            'active' => $criterion->isActive(),
-        ];
-        foreach ($criterion->getCriterionLangs() as $criterionLang) {
-            $criterionData['name'][$criterionLang->getLang()->getId()] = $criterionLang->getName();
-        }
-
-        return $criterionData;
+        $this->pccriterion_repository = $pccriterion_repository;
+        $this->lang_repository = $lang_repository;
     }
-
     /**
      * {@inheritdoc}
      */
-    public function getDefaultData(): array
+    public function get_data($criterion_id): array
+    {
+        $criterion = $this->pccriterion_repository->find($criterion_id);
+        $criterion_data = ['type' => $criterion->get_type(), 'active' => $criterion->is_active()];
+        foreach ($criterion->get_criterion_langs() as $criterion_lang) {
+            $criterion_data['name'][$criterion_lang->get_lang()->get_id()] = $criterion_lang->get_name();
+        }
+        return $criterion_data;
+    }
+    /**
+     * {@inheritdoc}
+     */
+    public function get_default_data(): array
     {
         $default_name = [];
-
-        $langEntities = $this->langRepository->findBy(['active' => 1]);
-        foreach ($langEntities as $langEntity) {
-            $default_name[$langEntity->getId()] = $langEntity->getIsoCode();
+        $lang_entities = $this->lang_repository->find_by(['active' => 1]);
+        foreach ($lang_entities as $lang_entity) {
+            $default_name[$lang_entity->get_id()] = $lang_entity->get_iso_code();
         }
-
-        return [
-            'type' => '',
-            'active' => false,
-            'name' => $default_name,
-        ];
+        return ['type' => '', 'active' => false, 'name' => $default_name];
     }
 }

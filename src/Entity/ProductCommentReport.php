@@ -1,6 +1,6 @@
 <?php
 
-declare(strict_types=1);
+declare (strict_types=1);
 /**
  * Copyright since 2007 PrestaShop SA and Contributors
  * PrestaShop is an International Registered Trademark & Property of PrestaShop SA
@@ -25,16 +25,14 @@ declare(strict_types=1);
  * @copyright Since 2007 PrestaShop SA and Contributors
  * @license   https://opensource.org/licenses/AFL-3.0 Academic Free License 3.0 (AFL-3.0)
  */
-
-namespace PrestaShop\Module\ProductComment\Entity;
+namespace Presta_Shop\Module\Product_Comment\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
-
 /**
  * @ORM\Table()
  * @ORM\Entity()
  */
-class ProductCommentReport
+class Product_Comment_Report
 {
     /**
      * @ORM\Id
@@ -44,39 +42,33 @@ class ProductCommentReport
      * @var ProductComment
      */
     private $comment;
-
     /**
      * @ORM\Id
      * @ORM\Column(name="id_customer", type="integer")
      *
      * @var int
      */
-    private $customerId;
-
+    private $customer_id;
     /**
      * @param int $customerId
      */
-    public function __construct(
-        ProductComment $comment,
-        $customerId
-    ) {
+    public function __construct(Product_Comment $comment, $customer_id)
+    {
         $this->comment = $comment;
-        $this->customerId = $customerId;
+        $this->customer_id = $customer_id;
     }
-
     /**
      * @return ProductComment
      */
-    public function getComment()
+    public function get_comment()
     {
         return $this->comment;
     }
-
     /**
      * @return int
      */
-    public function getCustomerId()
+    public function get_customer_id()
     {
-        return $this->customerId;
+        return $this->customer_id;
     }
 }

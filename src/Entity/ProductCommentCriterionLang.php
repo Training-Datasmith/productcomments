@@ -8,19 +8,17 @@
  * This source file is subject to the Academic Free License 3.0 (AFL-3.0).
  * It is also available through the world-wide-web at this URL: https://opensource.org/licenses/AFL-3.0
  */
-declare(strict_types=1);
-
-namespace PrestaShop\Module\ProductComment\Entity;
+declare (strict_types=1);
+namespace Presta_Shop\Module\Product_Comment\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
-use PrestaShopBundle\Entity\Lang;
-
+use Presta_Shop_Bundle\Entity\Lang;
 /**
  * @ORM\Table()
  *
  * @ORM\Entity()
  */
-class ProductCommentCriterionLang
+class Product_Comment_Criterion_Lang
 {
     /**
      * @var ProductCommentCriterion
@@ -32,7 +30,6 @@ class ProductCommentCriterionLang
      * @ORM\JoinColumn(name="id_product_comment_criterion", referencedColumnName="id_product_comment_criterion", nullable=false)
      */
     private $productcommentcriterion;
-
     /**
      * @var Lang
      *
@@ -43,53 +40,43 @@ class ProductCommentCriterionLang
      * @ORM\JoinColumn(name="id_lang", referencedColumnName="id_lang", nullable=false, onDelete="CASCADE")
      */
     private $lang;
-
     /**
      * @var string
      *
      * @ORM\Column(name="name", type="string", nullable=false)
      */
     private $name;
-
     /**
      * @return ProductCommentCriterion
      */
-    public function getProductCommentCriterion()
+    public function get_product_comment_criterion()
     {
         return $this->productcommentcriterion;
     }
-
-    public function setProductCommentCriterion(ProductCommentCriterion $productcommentcriterion): self
+    public function set_product_comment_criterion(Product_Comment_Criterion $productcommentcriterion): self
     {
         $this->productcommentcriterion = $productcommentcriterion;
-
         return $this;
     }
-
     /**
      * @return Lang
      */
-    public function getLang()
+    public function get_lang()
     {
         return $this->lang;
     }
-
-    public function setLang(Lang $lang): self
+    public function set_lang(Lang $lang): self
     {
         $this->lang = $lang;
-
         return $this;
     }
-
-    public function getName(): string
+    public function get_name(): string
     {
         return $this->name;
     }
-
-    public function setName(string $name): self
+    public function set_name(string $name): self
     {
         $this->name = $name;
-
         return $this;
     }
 }
