@@ -447,5 +447,8 @@ class ProductCommentRepositoryTest extends IntegrationTestCase
             [$id]
         );
         $this->assertEqualsWithDelta(4.5, $stored, 0.001);
+
+        $reloaded = self::$entityManager->find(ProductComment::class, $id);
+        $this->assertEqualsWithDelta(4.5, (float) $reloaded->getGrade(), 0.001);
     }
 }
