@@ -1,0 +1,40 @@
+{
+  "name": "prestashop/productcomments-tests",
+  "description": "PHPUnit suite for productcomments module",
+  "license": "AFL-3.0",
+  "require-dev": {
+    "phpunit/phpunit": "7.5.20",
+    "doctrine/orm": "2.9.3",
+    "doctrine/dbal": "2.13.9",
+    "doctrine/persistence": "2.2.4",
+    "doctrine/doctrine-bundle": "2.2.4",
+    "doctrine/annotations": "1.13.3",
+    "symfony/framework-bundle": "4.4.51",
+    "symfony/cache": "4.4.48"
+  },
+  "config": {
+    "platform": {
+      "php": "7.1.33"
+    },
+    "sort-packages": true
+  },
+  "autoload": {
+    "psr-4": {
+      "PrestaShop\\Module\\ProductComment\\": "../src/",
+      "PrestaShop\\Module\\ProductComment\\Tests\\": "",
+      "PrestaShop\\Tests\\Stubs\\": "Stubs/",
+      "PrestaShop\\PrestaShop\\Core\\Module\\": "Stubs/PrestaShop/Core/Module/",
+      "PrestaShop\\PrestaShop\\Core\\Form\\IdentifiableObject\\DataHandler\\": "Stubs/PrestaShop/Core/Form/IdentifiableObject/DataHandler/",
+      "PrestaShop\\PrestaShop\\Core\\Form\\IdentifiableObject\\DataProvider\\": "Stubs/PrestaShop/Core/Form/IdentifiableObject/DataProvider/",
+      "PrestaShop\\PrestaShop\\Adapter\\": "Stubs/PrestaShop/Adapter/",
+      "PrestaShopBundle\\Entity\\": "Stubs/PrestaShopBundle/Entity/",
+      "PrestaShopBundle\\Entity\\Repository\\": "Stubs/PrestaShopBundle/Entity/Repository/"
+    },
+    "classmap": [
+      "../controllers/front/PostComment.php",
+      "../controllers/front/ListComments.php",
+      "../controllers/front/CommentGrade.php",
+      "../controllers/front/UpdateCommentUsefulness.php"
+    ]
+  }
+}

@@ -89,9 +89,9 @@ class ProductComment
     private $content;
 
     /**
-     * @var int
+     * @var float
      *
-     * @ORM\Column(name="grade", type="integer")
+     * @ORM\Column(name="grade", type="float")
      */
     private $grade;
 
@@ -253,7 +253,7 @@ class ProductComment
     }
 
     /**
-     * @param int $grade
+     * @param float $grade
      *
      * @return ProductComment
      */

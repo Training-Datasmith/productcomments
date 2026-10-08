@@ -282,6 +282,8 @@ class ProductCommentRepository extends ServiceEntityRepository
         $qb
             ->select('COUNT(*)')
             ->from($this->databasePrefix . 'product_comment', 'pc')
+            ->andWhere('pc.deleted = :not_deleted')
+            ->setParameter('not_deleted', 0)
         ;
 
         if (!$skip_validate) {
@@ -304,6 +306,10 @@ class ProductCommentRepository extends ServiceEntityRepository
      */
     public function getAverageGrades(array $productIds, $validatedOnly)
     {
+        if ($productIds === []) {
+            return [];
+        }
+
         $sql = 'SELECT';
 
         $count = count($productIds);
@@ -369,6 +375,10 @@ class ProductCommentRepository extends ServiceEntityRepository
      */
     public function getCommentsNumberForProducts(array $productIds, $validatedOnly)
     {
+        if ($productIds === []) {
+            return [];
+        }
+
         $sql = 'SELECT';
 
         $count = count($productIds);
