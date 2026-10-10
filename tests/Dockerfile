@@ -1,4 +1,4 @@
-FROM php:7.1.33-cli
+FROM php:7.1.33-cli@sha256:e0e6ced092bbf073e4f3e48545a8e1a2592217b3346ef0cb8b18ecacf8ae1522
 
 RUN set -eux; \
     export DEBIAN_FRONTEND=noninteractive; \

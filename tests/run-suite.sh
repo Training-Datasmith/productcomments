@@ -4,9 +4,9 @@ set -euo pipefail
 ROOT_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")/.." && pwd)"
 cd "$ROOT_DIR"
 
-PHP_BASE_IMAGE="php:7.1.33-cli"
+PHP_BASE_IMAGE="php:7.1.33-cli@sha256:e0e6ced092bbf073e4f3e48545a8e1a2592217b3346ef0cb8b18ecacf8ae1522"
+MYSQL_IMAGE="mysql:5.7.44@sha256:4bc6bc963e6d8443453676cae56536f4b8156d78bae03c0145cbe47c2aad73bb"
 PHP_TEST_IMAGE="productcomments-php-test:7.1.33"
-MYSQL_IMAGE="mysql:5.7.44"
 COMPOSER_VERSION="2.2.24"
 NETWORK_NAME="pc-test"
 MYSQL_CONTAINER="pc-mysql"
@@ -15,43 +15,21 @@ MYSQL_DATABASE="productcomments"
 READINESS_TIMEOUT_SECONDS=120
 RANDOM_SEED="20261008"
 
-DIGEST_FILE="$ROOT_DIR/tests/docker-images.txt"
-
 cleanup() {
   docker rm -f "$MYSQL_CONTAINER" >/dev/null 2>&1 || true
   docker network rm "$NETWORK_NAME" >/dev/null 2>&1 || true
 }
 trap cleanup EXIT
 
-if ! docker image inspect "$PHP_BASE_IMAGE" >/dev/null 2>&1; then
-  docker pull "$PHP_BASE_IMAGE"
-fi
-if ! docker image inspect "$MYSQL_IMAGE" >/dev/null 2>&1; then
-  docker pull "$MYSQL_IMAGE"
-fi
-
-PHP_BASE_DIGEST="$(docker image inspect --format='{{index .RepoDigests 0}}' "$PHP_BASE_IMAGE")"
-MYSQL_DIGEST="$(docker image inspect --format='{{index .RepoDigests 0}}' "$MYSQL_IMAGE")"
-if [[ -z "$PHP_BASE_DIGEST" || -z "$MYSQL_DIGEST" ]]; then
-  echo "Failed to resolve image digests for $PHP_BASE_IMAGE or $MYSQL_IMAGE" >&2
-  exit 1
-fi
-
+docker pull "$MYSQL_IMAGE"
 docker build --network=host -t "$PHP_TEST_IMAGE" "$ROOT_DIR/tests"
-PHP_DIGEST="$(docker image inspect --format='{{.Id}}' "$PHP_TEST_IMAGE")"
-
-cat >"$DIGEST_FILE" <<EOF
-PHP_BASE_IMAGE=$PHP_BASE_DIGEST
-PHP_TEST_IMAGE=$PHP_DIGEST
-MYSQL_IMAGE=$MYSQL_DIGEST
-EOF
 
 docker network inspect "$NETWORK_NAME" >/dev/null 2>&1 || docker network create "$NETWORK_NAME"
 docker rm -f "$MYSQL_CONTAINER" >/dev/null 2>&1 || true
 docker run -d --name "$MYSQL_CONTAINER" --network "$NETWORK_NAME" \
   -e MYSQL_ROOT_PASSWORD="$MYSQL_ROOT_PASSWORD" \
   -e MYSQL_DATABASE="$MYSQL_DATABASE" \
-  "$MYSQL_DIGEST" \
+  "$MYSQL_IMAGE" \
   --character-set-server=utf8mb4 \
   --collation-server=utf8mb4_general_ci \
   --sql-mode=STRICT_TRANS_TABLES,ERROR_FOR_DIVISION_BY_ZERO,NO_AUTO_CREATE_USER,NO_ENGINE_SUBSTITUTION,ONLY_FULL_GROUP_BY
@@ -133,8 +111,8 @@ cat >"$RESULTS_FILE" <<EOF
 - Date: $(date -u +%Y-%m-%dT%H:%M:%SZ)
 - Branch: $(git rev-parse --abbrev-ref HEAD)
 - Commit: $COMMIT_SHA
-- PHP: $PHP_VERSION ($PHP_DIGEST)
-- MySQL: $MYSQL_DIGEST
+- PHP: $PHP_VERSION ($PHP_BASE_IMAGE)
+- MySQL: $MYSQL_IMAGE
 - Command base: $RUN_PHPUNIT
 EOF
 
