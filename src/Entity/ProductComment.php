@@ -245,7 +245,7 @@ class ProductComment
     }
 
     /**
-     * @return int
+     * @return float
      */
     public function getGrade()
     {

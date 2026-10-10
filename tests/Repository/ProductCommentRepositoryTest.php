@@ -90,6 +90,7 @@ class ProductCommentRepositoryTest extends IntegrationTestCase
         $repo = $this->createCommentRepository();
         $productId = 102;
         $this->insertCustomer(50, 'Del', 'eted', 1);
+        $this->insertCustomer(51, 'Live', 'User', 0);
         $dates = [
             '2020-01-06 00:00:00',
             '2020-01-05 00:00:00',
@@ -105,7 +106,7 @@ class ProductCommentRepositoryTest extends IntegrationTestCase
                 'date_add' => $date,
                 'validate' => $index === 5 ? 0 : 1,
                 'deleted' => $index === 4 ? 1 : 0,
-                'id_customer' => $index === 0 ? 50 : 0,
+                'id_customer' => $index === 0 ? 50 : ($index === 1 ? 51 : 0),
                 'customer_name' => 'Guest',
             ]);
         }
@@ -117,19 +118,26 @@ class ProductCommentRepositoryTest extends IntegrationTestCase
 
         $validatedOnly = $repo->paginate($productId, 1, 10, true);
         $titles = array_column($validatedOnly, 'title');
-        $this->assertNotContains('p5', $titles);
+        $this->assertSame(['p0', 'p1', 'p2', 'p3'], $titles);
 
         $defaultPage = $repo->paginate($productId, 1, 0, false);
         $this->assertCount(5, $defaultPage);
 
+        $page1 = $repo->paginate($productId, 1, 10, false);
         $deletedCustomerRow = null;
-        foreach ($page2 as $row) {
-            if ($row['title'] === 'p2') {
+        $liveCustomerRow = null;
+        foreach ($page1 as $row) {
+            if ($row['title'] === 'p0') {
                 $deletedCustomerRow = $row;
+            }
+            if ($row['title'] === 'p1') {
+                $liveCustomerRow = $row;
             }
         }
         $this->assertNotNull($deletedCustomerRow);
+        $this->assertNotNull($liveCustomerRow);
         $this->assertNull($deletedCustomerRow['firstname']);
+        $this->assertSame('Live', $liveCustomerRow['firstname']);
     }
 
     public function testIsPostAllowed()
@@ -389,6 +397,20 @@ class ProductCommentRepositoryTest extends IntegrationTestCase
             (int) self::$connection->fetchColumn(
                 'SELECT COUNT(*) FROM ps_product_comment_grade WHERE id_product_comment = ?',
                 [$otherId]
+            )
+        );
+        $this->assertSame(
+            0,
+            (int) self::$connection->fetchColumn(
+                'SELECT COUNT(*) FROM ps_product_comment_report WHERE id_product_comment = ?',
+                [$commentId]
+            )
+        );
+        $this->assertSame(
+            0,
+            (int) self::$connection->fetchColumn(
+                'SELECT COUNT(*) FROM ps_product_comment_usefulness WHERE id_product_comment = ?',
+                [$commentId]
             )
         );
     }

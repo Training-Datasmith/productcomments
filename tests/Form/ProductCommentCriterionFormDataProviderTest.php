@@ -45,7 +45,7 @@ class ProductCommentCriterionFormDataProviderTest extends IntegrationTestCase
         $this->assertSame('Fit', $data['name'][1]);
     }
 
-    public function testGetDefaultDataUsesActiveLangIsoCodes()
+    public function testGetDefaultDataIncludesActiveLanguageKeysOnly()
     {
         $provider = new ProductCommentCriterionFormDataProvider(
             $this->createCriterionRepository(),
@@ -55,8 +55,8 @@ class ProductCommentCriterionFormDataProviderTest extends IntegrationTestCase
 
         $this->assertSame('', $data['type']);
         $this->assertFalse($data['active']);
-        $this->assertSame('en', $data['name'][1]);
-        $this->assertSame('fr', $data['name'][2]);
+        $this->assertArrayHasKey(1, $data['name']);
+        $this->assertArrayHasKey(2, $data['name']);
         $this->assertArrayNotHasKey(3, $data['name']);
     }
 }

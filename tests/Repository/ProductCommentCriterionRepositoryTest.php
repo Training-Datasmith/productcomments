@@ -111,6 +111,7 @@ class ProductCommentCriterionRepositoryTest extends IntegrationTestCase
 
         $all = $repo->getCriterions(1, false, false);
         $allNames = array_column($all, 'name');
+        $this->assertContains('Aaa', $allNames);
         $this->assertLessThan(array_search('Zzz', $allNames), array_search('Aaa', $allNames));
         $row = null;
         foreach ($all as $item) {
@@ -148,6 +149,7 @@ class ProductCommentCriterionRepositoryTest extends IntegrationTestCase
         $this->assertSame(1, $result);
         $catalog->setActive(false);
         $repo->updateGeneral($catalog);
+        self::$entityManager->clear();
         $stored = self::$entityManager->find(ProductCommentCriterion::class, $catalog->getId());
         $this->assertFalse($stored->isActive());
     }
